@@ -27,6 +27,7 @@ class GuessingFragment : Fragment() {
     private var lives = 5
     private var selectedLetter: Char = ' '
     private var secretWord: String = ""
+    private var shownWord: String = ""
     private var gameStarted: Boolean = false
 
     override fun onCreateView(
@@ -47,9 +48,9 @@ class GuessingFragment : Fragment() {
         val lambdaLetterClick: (l: String) -> Unit = { letterClick(it) }
         recyclerView.adapter = LetterAdapter(lambdaLetterClick)
 
-        binding.categoryAnimals.setOnClickListener { resetGame() }
-        binding.categoryFood.setOnClickListener { resetGame() }
-        binding.categoryMetals.setOnClickListener { resetGame() }
+        binding.categoryAnimals.setOnClickListener { startNewGame(Category.ANIMALS) }
+        binding.categoryFood.setOnClickListener { startNewGame(Category.FOOD) }
+        binding.categoryMetals.setOnClickListener { startNewGame(Category.METALS) }
         binding.guessButton.setOnClickListener { guessSelectedLetter() }
 
         resetGame()
@@ -78,6 +79,25 @@ class GuessingFragment : Fragment() {
     }
 
 
+    fun startNewGame(category: Category) {
+
+        binding.selectedCategory.text = when(category) {
+            Category.ANIMALS -> binding.categoryAnimals.text.toString()
+            Category.FOOD -> binding.categoryFood.text.toString()
+            Category.METALS -> binding.categoryMetals.text.toString()
+            else -> "" }
+
+        gameStarted = true
+
+        secretWord = when(category) {
+            Category.ANIMALS -> requireContext().resources.getStringArray(R.array.animals).random()
+            Category.FOOD -> requireContext().resources.getStringArray(R.array.food).random()
+            Category.METALS -> requireContext().resources.getStringArray(R.array.metals).random()
+        }.uppercase()
+
+        shownWord = secretWord //"_".repeat(secretWord.length)
+        binding.secretWord.text = shownWord
+    }
 
     fun resetGame() {
         // Reset game variables
@@ -91,5 +111,8 @@ class GuessingFragment : Fragment() {
         binding.letterSelected.text = selectedLetter.toString()
 
     }
+
+    enum class Category { ANIMALS, FOOD, METALS}
+
 
 }

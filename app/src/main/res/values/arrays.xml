@@ -17,4 +17,12 @@
         <item>beef wellington</item>
     </string-array>
 
+    <string-array name="metals">
+        <item>iron</item>
+        <item>copper</item>
+        <item>gold</item>
+        <item>tin</item>
+        <item>silver</item>
+    </string-array>
+
 </resources>

@@ -94,15 +94,17 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/selected_category"
         android:layout_gravity="center"
         android:paddingTop="5dp"
-        android:text="animals"
+        android:text=""
         android:textStyle="bold" />
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/secret_word"
         android:layout_gravity="center"
         android:letterSpacing="0.8"
         android:paddingTop="30dp"
