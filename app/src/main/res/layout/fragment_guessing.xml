@@ -10,23 +10,35 @@
     android:orientation="vertical"
     android:padding="20dp" >
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/new_game"
+        android:layout_gravity="center"
+        android:paddingHorizontal="5dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center" >
+
         <Button
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="Win"
-            android:id="@+id/test_button_win"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/animals"
+            android:id="@+id/category_animals"
             android:layout_margin="5dp"/>
         <Button
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:text="Lose"
-            android:id="@+id/test_button_lose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/food"
+            android:id="@+id/category_food"
+            android:layout_margin="5dp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/metals"
+            android:id="@+id/category_metals"
             android:layout_margin="5dp"/>
     </LinearLayout>
 
@@ -112,6 +124,14 @@
         android:text=""
         android:textStyle="bold"
         android:textSize="32dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/guess"
+        android:id="@+id/guess_button"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"/>
 
 
     <androidx.recyclerview.widget.RecyclerView

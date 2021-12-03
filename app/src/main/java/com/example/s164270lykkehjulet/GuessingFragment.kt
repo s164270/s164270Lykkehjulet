@@ -26,8 +26,8 @@ class GuessingFragment : Fragment() {
     private var score = 0
     private var lives = 5
     private var selectedLetter: Char = ' '
-
-    private var test = 1
+    private var secretWord: String = ""
+    private var gameStarted: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,18 +42,15 @@ class GuessingFragment : Fragment() {
         //super.onViewCreated(view, savedInstanceState)
 
         recyclerView = binding.recyclerView
-        recyclerView.layoutManager = GridLayoutManager(context, 7)
+        recyclerView.layoutManager = GridLayoutManager(context, 9)
 
         val lambdaLetterClick: (l: String) -> Unit = { letterClick(it) }
         recyclerView.adapter = LetterAdapter(lambdaLetterClick)
 
-        binding.testButtonLose.setOnClickListener {
-            val action = GuessingFragmentDirections.actionGuessingFragmentToGameLostFragment()
-            view.findNavController().navigate(action)
-        }
-        binding.testButtonWin.setOnClickListener {
-            resetGame()
-        }
+        binding.categoryAnimals.setOnClickListener { resetGame() }
+        binding.categoryFood.setOnClickListener { resetGame() }
+        binding.categoryMetals.setOnClickListener { resetGame() }
+        binding.guessButton.setOnClickListener { guessSelectedLetter() }
 
         resetGame()
     }
@@ -70,6 +67,16 @@ class GuessingFragment : Fragment() {
         binding.score.text = score.toString()
         binding.letterSelected.text = selectedLetter.toString()
     }
+
+    fun guessSelectedLetter() {
+        if(gameStarted) {
+            score += 100
+            binding.score.text = score.toString()
+        }
+
+        // Check for game over
+    }
+
 
 
     fun resetGame() {
