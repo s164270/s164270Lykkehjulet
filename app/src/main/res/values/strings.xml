@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">s164270Lykkehjulet</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="game_lost_message">You are a loser</string>
+    <string name="game_won_message">You are a winner</string>
+    <string name="game_still_going_message">You are a still playing</string>
 </resources>

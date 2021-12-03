@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/guessingFragment">
+
+    <fragment
+        android:id="@+id/guessingFragment"
+        android:name="com.example.s164270lykkehjulet.GuessingFragment"
+        android:label="fragment_guessing"
+        tools:layout="@layout/fragment_guessing" >
+        <action
+            android:id="@+id/action_guessingFragment_to_gameWonFragment"
+            app:destination="@id/gameWonFragment" />
+        <action
+            android:id="@+id/action_guessingFragment_to_gameLostFragment"
+            app:destination="@id/gameLostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameWonFragment"
+        android:name="com.example.s164270lykkehjulet.GameWonFragment"
+        android:label="fragment_game_won"
+        tools:layout="@layout/fragment_game_won" >
+        <action
+            android:id="@+id/action_gameWonFragment_to_guessingFragment"
+            app:destination="@id/guessingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameLostFragment"
+        android:name="com.example.s164270lykkehjulet.GameLostFragment"
+        android:label="fragment_game_lost"
+        tools:layout="@layout/fragment_game_lost" >
+        <action
+            android:id="@+id/action_gameLostFragment_to_guessingFragment"
+            app:destination="@id/guessingFragment" />
+    </fragment>
+</navigation>
