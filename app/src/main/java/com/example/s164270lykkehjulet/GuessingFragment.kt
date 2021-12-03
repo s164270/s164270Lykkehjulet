@@ -30,6 +30,7 @@ class GuessingFragment : Fragment() {
     private var secretWord: String = ""
     private var shownWord: String = ""
     private var gameStarted: Boolean = false
+    private val guessedLetters: MutableList<Char> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,10 +72,20 @@ class GuessingFragment : Fragment() {
     }
 
     fun guessSelectedLetter() {
-        if(gameStarted) {
-            score += 100
-            binding.score.text = score.toString()
-        }
+        if(!gameStarted)
+            return
+
+    if(guessedLetters.contains(selectedLetter))
+    {
+        Toast.makeText(context, "ALREADY GUESSED THAT ONE BUDDY", Toast.LENGTH_SHORT).show()
+        return
+    }
+
+    score += 100
+    binding.score.text = score.toString()
+    guessedLetters.add(selectedLetter)
+    binding.lettersGuessed.text =  guessedLetters.toString().substring(1, guessedLetters.toString().length - 1)
+
 
         // Check for game over
     }

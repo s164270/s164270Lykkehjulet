@@ -6,6 +6,7 @@
     <string name="game_won_message">You are a winner</string>
     <string name="game_still_going_message">You are a still playing</string>
     <string name="static_score">Score: </string>
+    <string name="static_letters_guessed">Letters guessed: </string>
     <string name="static_lives">Lives: </string>
     <string name="static_category">Category</string>
     <string name="static_letter_selected">Letter selected: </string>
