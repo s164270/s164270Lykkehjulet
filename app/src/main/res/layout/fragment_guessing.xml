@@ -8,37 +8,111 @@
     android:layout_height="match_parent"
     tools:context=".GuessingFragment"
     android:orientation="vertical"
-    android:padding="20dp"
-    >
+    android:padding="20dp" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/game_still_going_message"
-        android:layout_gravity="center" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="center"
-        >
-
+        android:gravity="center" >
         <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
             android:text="Win"
             android:id="@+id/test_button_win"
             android:layout_margin="5dp"/>
-
         <Button
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
             android:text="Lose"
             android:id="@+id/test_button_lose"
             android:layout_margin="5dp"/>
-
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/static_lives"
+            android:layout_gravity="center"
+            android:paddingHorizontal="5dp"/>
+        <TextView
+            android:id="@+id/lives_left"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="5dp"
+            android:text=""
+            android:textAlignment="textEnd" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center" >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/static_score"
+            android:layout_gravity="center"
+            android:paddingHorizontal="5dp" />
+
+        <TextView
+            android:id="@+id/score"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="5dp"
+            android:text=""
+            android:textAlignment="textEnd" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingTop="20dp"
+        android:text="@string/static_category"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingTop="5dp"
+        android:text="animals"
+        android:textStyle="bold" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:letterSpacing="0.8"
+        android:paddingTop="30dp"
+        android:paddingBottom="10dp"
+        android:text=""
+        android:textAlignment="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/static_letter_selected"
+        android:textStyle="bold" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/letter_selected"
+        android:layout_gravity="center"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="32dp"/>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"

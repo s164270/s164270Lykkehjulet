@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,13 @@ class GuessingFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
 
+    /* Game variables */
+    private var score = 0
+    private var lives = 5
+    private var selectedLetter: Char = ' '
+
+    private var test = 1
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,21 +43,46 @@ class GuessingFragment : Fragment() {
 
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = GridLayoutManager(context, 7)
-        recyclerView.adapter = LetterAdapter()
+
+        val lambdaLetterClick: (l: String) -> Unit = { letterClick(it) }
+        recyclerView.adapter = LetterAdapter(lambdaLetterClick)
 
         binding.testButtonLose.setOnClickListener {
             val action = GuessingFragmentDirections.actionGuessingFragmentToGameLostFragment()
             view.findNavController().navigate(action)
         }
         binding.testButtonWin.setOnClickListener {
-            val action = GuessingFragmentDirections.actionGuessingFragmentToGameWonFragment()
-            view.findNavController().navigate(action)
+            resetGame()
         }
+
+        resetGame()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun letterClick(l: String) {
+        score += 10
+        selectedLetter = l[0]
+
+        binding.score.text = score.toString()
+        binding.letterSelected.text = selectedLetter.toString()
+    }
+
+
+    fun resetGame() {
+        // Reset game variables
+        lives = 5
+        score = 0
+        selectedLetter = 'A'
+
+        // Update layout
+        binding.livesLeft.text = lives.toString()
+        binding.score.text = score.toString()
+        binding.letterSelected.text = selectedLetter.toString()
+
     }
 
 }
