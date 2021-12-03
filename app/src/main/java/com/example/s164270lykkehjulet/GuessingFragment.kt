@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s164270lykkehjulet.databinding.FragmentGuessingBinding
 import java.lang.StringBuilder
+import kotlin.text.sumOf as sumOf1
 
 /**
  * A simple [Fragment] subclass.
@@ -64,7 +65,6 @@ class GuessingFragment : Fragment() {
     }
 
     fun letterClick(l: String) {
-        score += 10
         selectedLetter = l[0]
 
         binding.score.text = score.toString()
@@ -72,22 +72,48 @@ class GuessingFragment : Fragment() {
     }
 
     fun guessSelectedLetter() {
-        if(!gameStarted)
+        if(!gameStarted) return
+
+        if(guessedLetters.contains(selectedLetter))
+        {
+            Toast.makeText(context, R.string.alreadyGuessedThatLetter, Toast.LENGTH_SHORT).show()
             return
+        }
 
-    if(guessedLetters.contains(selectedLetter))
-    {
-        Toast.makeText(context, "ALREADY GUESSED THAT ONE BUDDY", Toast.LENGTH_SHORT).show()
-        return
-    }
+        guessedLetters.add(selectedLetter)
+        val occurrences = secretWord.count { c -> c == selectedLetter }
+        if(occurrences > 0) {
+            score += 100 * occurrences
 
-    score += 100
-    binding.score.text = score.toString()
-    guessedLetters.add(selectedLetter)
-    binding.lettersGuessed.text =  guessedLetters.toString().substring(1, guessedLetters.toString().length - 1)
+            //Revealed the guessed letter
+            val tempStr = StringBuilder()
+            for (c in secretWord) {
+                if (guessedLetters.contains(c) || c.isWhitespace()) tempStr.append(c) else tempStr.append("_")
+            }
+            shownWord = tempStr.toString()
+        }
+        else
+        {
+            lives -= 1
+        }
 
+        //
+        binding.score.text = score.toString()
+        binding.livesLeft.text = lives.toString()
+        binding.secretWord.text = shownWord.toString()
+        binding.lettersGuessed.text = guessedLetters.toString().substring(1, guessedLetters.toString().length - 1)
 
         // Check for game over
+        if(lives < 1) {
+            val action = GuessingFragmentDirections.actionGuessingFragmentToGameLostFragment()
+            requireView().findNavController().navigate(action)
+        }
+        else if(shownWord.contentEquals(secretWord))
+        {
+            val action = GuessingFragmentDirections.actionGuessingFragmentToGameWonFragment()
+            requireView().findNavController().navigate(action)
+        }
+
     }
 
 
@@ -122,7 +148,7 @@ class GuessingFragment : Fragment() {
         // Reset game variables
         lives = 5
         score = 0
-        selectedLetter = 'A'
+        selectedLetter = ' '
 
         // Update layout
         binding.livesLeft.text = lives.toString()

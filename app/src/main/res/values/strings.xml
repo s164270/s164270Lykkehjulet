@@ -17,4 +17,6 @@
     <string name="food">Food</string>
     <string name="metals">Metals</string>
 
+    <string name="alreadyGuessedThatLetter">ALREADY GUESSED THAT ONE BUDDY</string>
+
 </resources>
