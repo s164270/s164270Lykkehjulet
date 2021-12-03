@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.s164270lykkehjulet.databinding.FragmentGuessingBinding
 
 /**
@@ -17,6 +19,7 @@ class GuessingFragment : Fragment() {
 
     private var _binding: FragmentGuessingBinding? = null
     private val binding get() = _binding!!
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +31,12 @@ class GuessingFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        //super.onViewCreated(view, savedInstanceState)
+
+        recyclerView = binding.recyclerView
+        recyclerView.layoutManager = GridLayoutManager(context, 7)
+        recyclerView.adapter = LetterAdapter()
+
         binding.testButtonLose.setOnClickListener {
             val action = GuessingFragmentDirections.actionGuessingFragmentToGameLostFragment()
             view.findNavController().navigate(action)
