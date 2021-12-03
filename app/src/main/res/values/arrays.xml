@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string-array name="animals">
+        <item>lion</item>
+        <item>tiger</item>
+        <item>turtle</item>
+        <item>ferret</item>
+        <item>big cow</item>
+        <item>small cow</item>
+    </string-array>
+
+    <string-array name="food">
+        <item>pizza</item>
+        <item>burger</item>
+        <item>pasta</item>
+        <item>beef wellington</item>
+    </string-array>
+
+</resources>
