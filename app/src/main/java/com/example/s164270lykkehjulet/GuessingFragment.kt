@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s164270lykkehjulet.databinding.FragmentGuessingBinding
+import java.lang.StringBuilder
 
 /**
  * A simple [Fragment] subclass.
@@ -95,7 +96,14 @@ class GuessingFragment : Fragment() {
             Category.METALS -> requireContext().resources.getStringArray(R.array.metals).random()
         }.uppercase()
 
-        shownWord = secretWord //"_".repeat(secretWord.length)
+
+        // Obscure the word/phrase
+        val tempStr = StringBuilder()
+        for(c in secretWord)
+        {
+            if(c.isWhitespace()) tempStr.append(" ") else tempStr.append("_")
+        }
+        shownWord = tempStr.toString()
         binding.secretWord.text = shownWord
     }
 
