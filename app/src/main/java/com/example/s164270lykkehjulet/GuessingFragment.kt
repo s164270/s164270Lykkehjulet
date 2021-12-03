@@ -11,14 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s164270lykkehjulet.databinding.FragmentGuessingBinding
 import java.lang.StringBuilder
-import kotlin.random.Random
-import kotlin.text.sumOf as sumOf1
 
-/**
- * A simple [Fragment] subclass.
- * Use the [GuessingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class GuessingFragment : Fragment() {
 
     private var _binding: FragmentGuessingBinding? = null
@@ -57,8 +50,6 @@ class GuessingFragment : Fragment() {
         binding.categoryFood.setOnClickListener { startNewGame(Category.FOOD) }
         binding.categoryMetals.setOnClickListener { startNewGame(Category.METALS) }
         binding.guessAndSpinButton.setOnClickListener { spinOrGuess() }
-
-        resetGame()
     }
 
     override fun onDestroyView() {
@@ -168,13 +159,23 @@ class GuessingFragment : Fragment() {
 
 
     fun startNewGame(category: Category) {
+        // Set the game variables
+        lives = 5
+        binding.livesLeft.text = lives.toString()
+        score = 0
+        binding.score.text = score.toString()
+        selectedLetter = ' '
+        binding.letterSelected.text = selectedLetter.toString()
+        gameStage = GameStage.SPIN
+        binding.guessAndSpinButton.text = getString(R.string.spin)
 
         binding.selectedCategory.text = when(category) {
             Category.ANIMALS -> binding.categoryAnimals.text.toString()
             Category.FOOD -> binding.categoryFood.text.toString()
             Category.METALS -> binding.categoryMetals.text.toString()
-            else -> "" }
+            }
 
+        // Get a word/phrase from the category
         secretWord = when(category) {
             Category.ANIMALS -> requireContext().resources.getStringArray(R.array.animals).random()
             Category.FOOD -> requireContext().resources.getStringArray(R.array.food).random()
@@ -189,21 +190,6 @@ class GuessingFragment : Fragment() {
         }
         shownWord = tempStr.toString()
         binding.secretWord.text = shownWord
-
-        gameStage = GameStage.SPIN
-        binding.guessAndSpinButton.text = getString(R.string.spin)
-    }
-
-    fun resetGame() {
-        // Reset game variables
-        lives = 5
-        score = 0
-        selectedLetter = ' '
-
-        // Update layout
-        binding.livesLeft.text = lives.toString()
-        binding.score.text = score.toString()
-        binding.letterSelected.text = selectedLetter.toString()
 
     }
 

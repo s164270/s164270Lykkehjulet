@@ -17,7 +17,7 @@ class LetterAdapter(val letterClickFunction: (String) -> Unit) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(p0: LetterViewHolder, p1: Int) {
-        val letter = list.get(p1)
+        val letter = list[p1]
         p0.button.text = letter.toString()
         p0.button.setOnClickListener { letterClickFunction(letter.toString()) }
     }
@@ -26,7 +26,7 @@ class LetterAdapter(val letterClickFunction: (String) -> Unit) : RecyclerView.Ad
         return list.size
     }
 
-    class LetterViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+    class LetterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val button = view.findViewById<Button>(R.id.letter_button_item)
     }
 }
