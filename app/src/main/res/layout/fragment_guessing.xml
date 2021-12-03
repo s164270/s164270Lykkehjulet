@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".GuessingFragment"
     android:orientation="vertical"
-    android:padding="20dp" >
+    android:padding="5dp" >
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,46 +42,39 @@
             android:layout_margin="5dp"/>
     </LinearLayout>
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center" >
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/static_lives"
-            android:layout_gravity="center"
             android:paddingHorizontal="5dp"/>
         <TextView
             android:id="@+id/lives_left"
-            android:layout_width="80dp"
+            android:layout_width="50dp"
             android:layout_height="wrap_content"
             android:paddingHorizontal="5dp"
-            android:text=""
-            android:textAlignment="textEnd" />
-    </LinearLayout>
+            android:text="" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center" >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/static_score"
-            android:layout_gravity="center"
             android:paddingHorizontal="5dp" />
 
         <TextView
             android:id="@+id/score"
-            android:layout_width="80dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:paddingHorizontal="5dp"
-            android:text=""
-            android:textAlignment="textEnd" />
+            android:text="" />
     </LinearLayout>
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -142,8 +135,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/guess"
-        android:id="@+id/guess_button"
+        android:text="@string/spin"
+        android:id="@+id/guess_and_spin_button"
         android:layout_gravity="center"
         android:layout_margin="5dp"/>
 

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">s164270Lykkehjulet</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="new_game">Select a category to start a new game</string>
     <string name="game_lost_message">You are a loser</string>
     <string name="game_won_message">You are a winner</string>
@@ -11,12 +10,10 @@
     <string name="static_category">Category</string>
     <string name="static_letter_selected">Letter selected: </string>
     <string name="guess">guess</string>
-
-
+    <string name="spin">spin</string>
     <string name="animals">Animals</string>
     <string name="food">Food</string>
     <string name="metals">Metals</string>
-
     <string name="alreadyGuessedThatLetter">ALREADY GUESSED THAT ONE BUDDY</string>
 
 </resources>

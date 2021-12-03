@@ -4,7 +4,10 @@
     <string-array name="animals">
         <item>lion</item>
         <item>tiger</item>
+        <item>gorilla gorilla gorilla</item>
+        <item>western lowland gorilla</item>
         <item>turtle</item>
+        <item>blue and yellow macaw</item>
         <item>ferret</item>
         <item>big cow</item>
         <item>small cow</item>
@@ -15,6 +18,7 @@
         <item>burger</item>
         <item>pasta</item>
         <item>beef wellington</item>
+        <item>chopped onions</item>
     </string-array>
 
     <string-array name="metals">
@@ -23,6 +27,8 @@
         <item>gold</item>
         <item>tin</item>
         <item>silver</item>
+        <item>zinc></item>
+        <item>uranium></item>
     </string-array>
 
 </resources>

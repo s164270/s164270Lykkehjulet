@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.s164270lykkehjulet.databinding.FragmentGuessingBinding
 import java.lang.StringBuilder
+import kotlin.random.Random
 import kotlin.text.sumOf as sumOf1
 
 /**
@@ -30,8 +31,9 @@ class GuessingFragment : Fragment() {
     private var selectedLetter: Char = ' '
     private var secretWord: String = ""
     private var shownWord: String = ""
-    private var gameStarted: Boolean = false
+    private var gameStage:Gamestage = Gamestage.SELECTCATEGORY
     private val guessedLetters: MutableList<Char> = mutableListOf()
+    private var pointsOnTheWheel = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,7 +56,7 @@ class GuessingFragment : Fragment() {
         binding.categoryAnimals.setOnClickListener { startNewGame(Category.ANIMALS) }
         binding.categoryFood.setOnClickListener { startNewGame(Category.FOOD) }
         binding.categoryMetals.setOnClickListener { startNewGame(Category.METALS) }
-        binding.guessButton.setOnClickListener { guessSelectedLetter() }
+        binding.guessAndSpinButton.setOnClickListener { spinOrGuess() }
 
         resetGame()
     }
@@ -64,6 +66,7 @@ class GuessingFragment : Fragment() {
         _binding = null
     }
 
+
     fun letterClick(l: String) {
         selectedLetter = l[0]
 
@@ -71,9 +74,49 @@ class GuessingFragment : Fragment() {
         binding.letterSelected.text = selectedLetter.toString()
     }
 
-    fun guessSelectedLetter() {
-        if(!gameStarted) return
+    fun spinOrGuess() {
+        when(gameStage) {
+            Gamestage.SELECTCATEGORY -> return
+            Gamestage.SPIN -> spinTheWheel()
+            Gamestage.GUESS -> guessSelectedLetter()
+        }
+    }
 
+    fun spinTheWheel() {
+        val spinNumber = (1 .. 13).random()
+
+        var pointsOnTheWheel = 0
+
+        when(spinNumber) {
+            1 -> pointsOnTheWheel = 100 * spinNumber
+            2 -> pointsOnTheWheel = 100 * spinNumber
+            3 -> pointsOnTheWheel = 100 * spinNumber
+            4 -> pointsOnTheWheel = 100 * spinNumber
+            5 -> pointsOnTheWheel = 100 * spinNumber
+            6 -> pointsOnTheWheel = 100 * spinNumber
+            7 -> pointsOnTheWheel = 100 * spinNumber
+            8 -> pointsOnTheWheel = 100 * spinNumber
+            9 -> pointsOnTheWheel = 100 * spinNumber
+            10 -> pointsOnTheWheel = 100 * spinNumber
+            11 -> lives += 1    // extra turn
+            12 -> lives -= 1    // miss turn
+            13 -> score = 0     // bankrupt
+        }
+
+        if(pointsOnTheWheel > 0) {
+            gameStage = Gamestage.GUESS
+        }
+
+        updateUIElements()
+
+        // Check for game over
+        if(lives < 1) {
+            val action = GuessingFragmentDirections.actionGuessingFragmentToGameLostFragment()
+            requireView().findNavController().navigate(action)
+        }
+    }
+
+    fun guessSelectedLetter() {
         if(guessedLetters.contains(selectedLetter))
         {
             Toast.makeText(context, R.string.alreadyGuessedThatLetter, Toast.LENGTH_SHORT).show()
@@ -83,7 +126,7 @@ class GuessingFragment : Fragment() {
         guessedLetters.add(selectedLetter)
         val occurrences = secretWord.count { c -> c == selectedLetter }
         if(occurrences > 0) {
-            score += 100 * occurrences
+            score += pointsOnTheWheel * occurrences
 
             //Revealed the guessed letter
             val tempStr = StringBuilder()
@@ -97,11 +140,13 @@ class GuessingFragment : Fragment() {
             lives -= 1
         }
 
+        // Change the stage back to spin
+        gameStage = Gamestage.SPIN
+        // Reset the wheel
+        pointsOnTheWheel = 0
+
         //
-        binding.score.text = score.toString()
-        binding.livesLeft.text = lives.toString()
-        binding.secretWord.text = shownWord.toString()
-        binding.lettersGuessed.text = guessedLetters.toString().substring(1, guessedLetters.toString().length - 1)
+        updateUIElements()
 
         // Check for game over
         if(lives < 1) {
@@ -116,6 +161,21 @@ class GuessingFragment : Fragment() {
 
     }
 
+    fun updateUIElements()
+    {
+        binding.guessAndSpinButton.text = when(gameStage) {
+            Gamestage.SPIN -> R.string.spin.toString()
+            Gamestage.GUESS -> R.string.guess.toString()
+            else -> R.string.spin.toString()
+        }
+
+        binding.guessAndSpinButton.text = R.string.spin.toString()
+        binding.score.text = score.toString()
+        binding.livesLeft.text = lives.toString()
+        binding.secretWord.text = shownWord
+        binding.lettersGuessed.text = guessedLetters.toString().substring(1, guessedLetters.toString().length - 1)
+    }
+
 
     fun startNewGame(category: Category) {
 
@@ -125,14 +185,13 @@ class GuessingFragment : Fragment() {
             Category.METALS -> binding.categoryMetals.text.toString()
             else -> "" }
 
-        gameStarted = true
+        gameStage = Gamestage.SPIN
 
         secretWord = when(category) {
             Category.ANIMALS -> requireContext().resources.getStringArray(R.array.animals).random()
             Category.FOOD -> requireContext().resources.getStringArray(R.array.food).random()
             Category.METALS -> requireContext().resources.getStringArray(R.array.metals).random()
         }.uppercase()
-
 
         // Obscure the word/phrase
         val tempStr = StringBuilder()
@@ -158,6 +217,6 @@ class GuessingFragment : Fragment() {
     }
 
     enum class Category { ANIMALS, FOOD, METALS}
-
+    enum class Gamestage {SELECTCATEGORY, SPIN, GUESS}
 
 }
