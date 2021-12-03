@@ -19,7 +19,7 @@
         <Button
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:text="Go back!"
+            android:text="@string/play_again"
             android:id="@+id/go_back_button"/>
 
     </LinearLayout>

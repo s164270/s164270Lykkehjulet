@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">s164270Lykkehjulet</string>
     <string name="new_game">Select a category to start a new game</string>
-    <string name="game_lost_message">You are a loser</string>
-    <string name="game_won_message">You are a winner</string>
+    <string name="game_lost_message">You lost</string>
+    <string name="game_won_message">You won</string>
     <string name="game_still_going_message">You are a still playing</string>
     <string name="static_score">Score: </string>
     <string name="static_letters_guessed">Letters guessed: </string>
@@ -15,5 +15,12 @@
     <string name="food">Food</string>
     <string name="metals">Metals</string>
     <string name="alreadyGuessedThatLetter">ALREADY GUESSED THAT ONE BUDDY</string>
+    <string name="points_on_the_wheel">On the wheel: </string>
+
+    <string name="miss_turn">-1 life</string>
+    <string name="extra_turn">+1 life</string>
+    <string name="bankrupt">Bankrupt</string>
+
+    <string name="play_again">Play again</string>
 
 </resources>
